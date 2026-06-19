@@ -505,7 +505,7 @@
     <!-- HERO -->
     <section class="hero">
         <span class="crown-emoji">👑</span>
-        <div class="farewell-tag">A Heartfelt Goodbye</div>
+        <div class="farewell-tag">A Chapter Ends, A Legend Continues ✨</div>
         <h1>Farewell,<br>Alka Ma'am</h1>
         <h2>Thank You for Everything 🌸</h2>
         <p class="tagline">You didn't just teach us — you inspired us. Your presence made every day brighter, and your
@@ -515,7 +515,7 @@
             <span id="musicLabel">Play Farewell Music</span>
         </button>
         <div class="scroll-hint">
-            <span>Scroll to celebrate</span>
+            <span>Scroll</span>
             <div class="scroll-arrow"></div>
         </div>
     </section>
@@ -604,7 +604,7 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="hearts">💛🌸💜</div>
-        <p>Made with love by a grateful dev team &nbsp;•&nbsp; Farewell 2025</p>
+        <p>Made with love by your NKN dev team &nbsp;💛</p>
     </footer>
 
     <script>
@@ -899,6 +899,23 @@
 
         resizeStars(); resizeBalloons(); resizeConfetti();
         requestAnimationFrame(loop);
+
+        // Auto-play music on first user interaction (browser policy)
+        function autoStartMusic() {
+            if (!musicPlaying) toggleMusic();
+            document.removeEventListener('click', autoStartMusic);
+            document.removeEventListener('scroll', autoStartMusic);
+            document.removeEventListener('keydown', autoStartMusic);
+        }
+        // Try immediate autoplay
+        try {
+            toggleMusic();
+        } catch (e) {
+            // Fallback: wait for interaction
+            document.addEventListener('click', autoStartMusic);
+            document.addEventListener('scroll', autoStartMusic);
+            document.addEventListener('keydown', autoStartMusic);
+        }
 
         // Trigger first confetti burst after 2s
         setTimeout(() => { spawnConfetti(60); launchFirework(); }, 2000);

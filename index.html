@@ -484,7 +484,133 @@
             }
         }
 
+        /* ---- HERO PHOTO ---- */
+        .hero-photo-wrap {
+            margin: 1.8rem 0 1.5rem;
+            animation: fadeInUp 1.3s ease 0.2s both;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .hero-photo-ring {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .hero-photo-ring::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--gold), var(--rose), var(--lavender), var(--sky), var(--mint), var(--gold));
+            animation: spin 6s linear infinite;
+            z-index: -1;
+            filter: blur(4px);
+        }
+
+        .hero-photo-ring::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(from 180deg, var(--lavender), var(--rose), var(--gold), var(--sky), var(--lavender));
+            animation: spin 4s linear infinite reverse;
+            z-index: -1;
+        }
+
+        .hero-photo-frame {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #1A0A2E;
+            background: linear-gradient(135deg, #2D1B4E, #0A1628);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-photo-frame:hover img {
+            transform: scale(1.07);
+        }
+
+        .hero-photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(26, 10, 46, 0.85) 0%, transparent 100%);
+            padding: 1.5rem 1rem 1rem;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--gold);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 0 0 50% 50%;
+        }
+
+        .hero-photo-frame:hover .hero-photo-overlay {
+            opacity: 1;
+        }
+
+        .hero-photo-caption {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.95rem;
+            font-style: italic;
+            letter-spacing: 0.03em;
+        }
+
+        .hero-caption-line {
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(245, 200, 66, 0.4), transparent);
+        }
+
+        .hero-photo-fallback {
+            display: none;
+            font-size: 5rem;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
         @media (max-width: 600px) {
+            .hero-photo-ring {
+                width: 220px;
+                height: 220px;
+            }
+
             .message-box {
                 padding: 2rem 1.5rem;
             }
@@ -506,6 +632,24 @@
     <section class="hero">
         <span class="crown-emoji">👑</span>
         <div class="farewell-tag">A Chapter Ends, A Legend Continues ✨</div>
+
+        <!-- INLINE PHOTO -->
+        <div class="hero-photo-wrap">
+            <div class="hero-photo-ring">
+                <div class="hero-photo-frame">
+                    <img src="alka.jpg" alt="Alka Ma'am"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='none'; this.parentElement.querySelector('.hero-photo-fallback').style.display='flex'" />
+                    <div class="hero-photo-overlay">Alka Ma'am</div>
+                    <div class="hero-photo-fallback">🌸</div>
+                </div>
+            </div>
+            <div class="hero-photo-caption">
+                <div class="hero-caption-line"></div>
+                <span>The face behind a thousand lessons 🌸</span>
+                <div class="hero-caption-line"></div>
+            </div>
+        </div>
+
         <h1>Farewell,<br>Alka Ma'am</h1>
         <h2>Thank You for Everything 🌸</h2>
         <p class="tagline">You didn't just teach us — you inspired us. Your presence made every day brighter, and your
@@ -604,7 +748,7 @@
     <!-- FOOTER -->
     <footer class="footer">
         <div class="hearts">💛🌸💜</div>
-        <p>Made with love by Chandan Raj &nbsp;💛</p>
+        <p>Made with love by your NKN/NIC React team &nbsp;💛</p>
     </footer>
 
     <script>
